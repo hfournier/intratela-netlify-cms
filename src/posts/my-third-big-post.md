@@ -2,7 +2,7 @@
 title: This is my third post
 description: Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
 date: 2020-09-03
-author: Surjith S M
+author: Henri Fournier
 tags:
   - second-tag
 ---
@@ -110,7 +110,7 @@ console.log(foo(5));
 
 [link text](http://dev.nodeca.com)
 
-[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+[link with title](http://nodeca.github.io/pica/demo/ 'title text!')
 
 Autoconverted link https://github.com/nodeca/pica
 
