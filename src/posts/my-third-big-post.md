@@ -5,7 +5,7 @@ description: Iterative approaches to corporate strategy foster collaborative
   holistic world view of disruptive innovation via workplace diversity and
   empowerment.
 author: Henri Fournier
-date: 2020-09-03T11:00:00.000Z
+date: 2021-05-30T11:00:00.000Z
 tags:
   - second-tag
 ---
