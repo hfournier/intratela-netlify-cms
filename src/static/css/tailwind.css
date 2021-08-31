@@ -3,18 +3,320 @@
 @tailwind utilities;
 
 /*Your Custom CSS Goes here*/
-
-h1 {
-  @apply text-4xl tracking-tighter mb-3 text-center lg:text-7xl;
+@layer base {
+  @font-face {
+    font-family: 'Cunia';
+    src: url('../fonts/Cunia-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 }
 
-h3 {
-  @apply text-2xl font-bold mb-3;
+@layer components {
+  /* header styles */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-cunia;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply text-primary-500;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply text-secondary-500;
+  }
+
+  /* button styles */
+
+  .btn {
+    @apply py-2;
+    @apply px-4;
+    @apply rounded;
+    @apply font-semibold;
+    @apply uppercase;
+  }
+
+  .btn-small {
+    @apply text-sm;
+    @apply py-1;
+    @apply px-3;
+  }
+
+  .btn-large {
+    @apply text-xl;
+    @apply py-3;
+    @apply px-5;
+  }
+
+  .btn-fab {
+    @apply flex;
+    @apply items-center;
+    @apply px-3;
+    @apply py-3;
+    @apply rounded-full;
+  }
+
+  .btn:not(:disabled):hover {
+    @apply shadow-lg;
+  }
+
+  .btn:focus {
+    @apply outline-none;
+    @apply ring;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600;
+    @apply text-white;
+  }
+
+  .btn-primary:not(:disabled):hover {
+    @apply bg-primary-500;
+  }
+
+  .btn-primary:not(:disabled):focus {
+    @apply bg-primary-700;
+  }
+
+  .btn-primary:not(:disabled):active {
+    @apply bg-primary-700;
+  }
+
+  .btn-primary.btn-outline {
+    @apply border-primary-600;
+    @apply text-primary-600;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-500;
+    @apply text-white;
+  }
+
+  .btn-secondary:not(:disabled):hover {
+    @apply bg-secondary-400;
+  }
+
+  .btn-secondary:not(:disabled):focus {
+    @apply bg-secondary-600;
+  }
+
+  .btn-secondary:not(:disabled):active {
+    @apply bg-secondary-600;
+  }
+
+  .btn-secondary.btn-outline {
+    @apply border-secondary-600;
+    @apply text-secondary-600;
+  }
+
+  .btn-outline {
+    @apply bg-transparent;
+    @apply border;
+  }
+
+  .btn-outline:not(:disabled):hover,
+  .btn-outline:not(:disabled):focus,
+  .btn-outline:not(:disabled):active {
+    @apply border-transparent;
+    @apply text-white;
+  }
+
+  .btn-raised {
+    @apply shadow-lg;
+  }
+
+  .btn-raised:not(:disabled):hover {
+    @apply shadow-xl;
+  }
+
+  .btn:disabled {
+    @apply opacity-50;
+    @apply cursor-not-allowed;
+  }
+
+  .text-field-outline {
+    @apply relative;
+    @apply border;
+    @apply rounded;
+  }
+
+  .text-field-outline:focus-within {
+    @apply border-transparent;
+  }
+
+  .text-field-outline > input,
+  .text-field-outline > textarea {
+    @apply block;
+    @apply relative;
+    @apply pl-4;
+    @apply pr-3;
+    @apply py-4;
+    @apply w-full;
+    @apply appearance-none;
+    @apply bg-transparent;
+    @apply z-10;
+  }
+
+  .text-field-outline.dense > input,
+  .text-field-outline.dense > textarea {
+    @apply py-2;
+  }
+
+  .text-field-outline > input:focus,
+  .text-field-outline > textarea:focus {
+    @apply outline-none;
+  }
+
+  .inner-outline {
+    @apply absolute;
+    @apply border-2;
+    @apply border-transparent;
+    @apply rounded;
+    height: calc(100% + 2 * 1px);
+    width: calc(100% + 2 * 1px);
+    top: -1px;
+    left: -1px;
+  }
+
+  .text-field-outline:hover > .inner-outline {
+    @apply border-gray-500;
+  }
+
+  .text-field-outline:focus-within > .inner-outline {
+    @apply border-secondary-500;
+  }
+
+  .text-field-outline > input:disabled ~ .inner-outline,
+  .text-field-outline > textarea:disabled ~ .inner-outline {
+    @apply border;
+    @apply border-gray-200;
+  }
+
+  .text-field-outline > input.input-error ~ .inner-outline,
+  .text-field-outline > textarea.input-error ~ .inner-outline {
+    @apply border-red-700;
+  }
+
+  .text-field-outline > label {
+    @apply absolute;
+    @apply top-0;
+    @apply ml-3;
+    @apply px-1;
+    @apply py-4;
+    @apply origin-0;
+    @apply duration-200;
+    @apply text-gray-300;
+  }
+
+  .text-field-outline.dense > label {
+    @apply py-2;
+  }
+
+  .text-field-outline:focus-within > label {
+    @apply text-secondary-500;
+  }
+
+  .text-field-outline > input:disabled ~ label,
+  .text-field-outline > textarea:disabled ~ label {
+    @apply text-gray-200;
+  }
+
+  .text-field-outline > input.input-error ~ label,
+  .text-field-outline > textarea.input-error ~ label {
+    @apply text-red-700;
+  }
+
+  .text-field-outline:focus-within > label,
+  .text-field-outline > input:not(:placeholder-shown) ~ label,
+  .text-field-outline > textarea:not(:placeholder-shown) ~ label {
+    @apply transform;
+    @apply scale-75;
+    @apply -translate-y-3;
+    @apply py-0;
+    @apply bg-gray-50;
+  }
+
+  .text-field-outline:not(:focus-within)
+    > input:not(:placeholder-shown)
+    ~ label,
+  .text-field-outline:not(:focus-within)
+    > textarea:not(:placeholder-shown)
+    ~ label {
+    @apply text-gray-500;
+  }
+
+  .text-field-outline:not(:focus-within)
+    > input:disabled:not(:placeholder-shown)
+    ~ label,
+  .text-field-outline:not(:focus-within)
+    > textarea:disabled:not(:placeholder-shown)
+    ~ label {
+    @apply text-gray-200;
+  }
+
+  .text-field-outline:not(:focus-within)
+    > input.input-error:not(:placeholder-shown)
+    ~ label,
+  .text-field-outline:not(:focus-within)
+    > textarea.input-error:not(:placeholder-shown)
+    ~ label {
+    @apply text-red-700;
+  }
+
+  .error-msg {
+    @apply absolute;
+    @apply text-xs;
+    @apply text-red-700;
+    /* top: calc(height + 0.5rem); */
+    left: 0.5rem;
+  }
+
+  .pill {
+    @apply inline-block px-3 py-1 mb-1 mr-1 text-sm font-semibold rounded-full lg:mb-2 lg:mr-2;
+  }
+
+  .pill-primary {
+    @apply text-white bg-primary-500;
+  }
+
+  .pill-secondary {
+    @apply text-white bg-secondary-500;
+  }
+
+  .floating-icon,
+  .revFloating-icon {
+    @apply hover:animate-none;
+  }
+  .floating-icon {
+    @apply animate-floating;
+  }
+  .revFloating-icon {
+    @apply animate-revfloating;
+  }
+}
+
+@layer utilities {
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
 }
 
 /* Syntax Highlighting*/
 
-body :not(pre) > code[class*="language-"],
-body pre[class*="language-"] {
+body :not(pre) > code[class*='language-'],
+body pre[class*='language-'] {
   @apply bg-gray-800;
 }

@@ -2,6 +2,7 @@ const yaml = require('js-yaml');
 const { DateTime } = require('luxon');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const htmlmin = require('html-minifier');
+const year = String(new Date().getFullYear());
 
 module.exports = function (eleventyConfig) {
   // Disable automatic use of your .gitignore
@@ -32,11 +33,18 @@ module.exports = function (eleventyConfig) {
       './static/css/prism-tomorrow.css'
   });
 
+  // Copy Font Folder to /_site
+  eleventyConfig.addPassthroughCopy('./src/static/fonts');
+
   // Copy Image Folder to /_site
   eleventyConfig.addPassthroughCopy('./src/static/img');
 
   // Copy favicon to route of /_site
   eleventyConfig.addPassthroughCopy('./src/favicon.ico');
+
+  eleventyConfig.addShortcode('year', () => {
+    return year;
+  });
 
   // Minify HTML
   eleventyConfig.addTransform('htmlmin', function (content, outputPath) {

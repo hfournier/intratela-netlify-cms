@@ -1,5 +1,5 @@
 ---
-title: This is my very first post
+title: This is my very first edited post
 description: Capitalize on low hanging fruit to identify a ballpark value added
   activity to beta test. Override the digital divide with additional
   clickthroughs from DevOps.
@@ -13,15 +13,9 @@ tags:
 
 # This is a Heading h1
 
-## This is a Heading h2
-
 ### This is a Heading h3
 
-#### This is a Heading h4
-
 ##### This is a Heading h5
-
-###### This is a Heading h6
 
 ## Emphasis
 
