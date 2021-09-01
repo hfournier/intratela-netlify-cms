@@ -9469,7 +9469,7 @@ var MailerService = class {
       this.smtpConfig = {
         host: "intratela-com.mail.protection.outlook.com",
         port: 25,
-        secure: false,
+        secure: true,
         debug: true,
         logger: true
       };
