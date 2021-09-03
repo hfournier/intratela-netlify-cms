@@ -9455,7 +9455,13 @@ var MailerService = class {
   constructor() {
   }
   async sendMail(fromName, fromAddress, subject, message) {
-    if (process.env.MAIL_LOGIN) {
+    if (process.env.MAIL_METHOD === "O365 Direct Send") {
+      this.smtpConfig = {
+        host: process.env.MAIL_HOST,
+        port: parseInt(process.env.MAIL_PORT),
+        secure: process.env.MAIL_SECURE != null ? process.env.MAIL_SECURE === "true" : false
+      };
+    } else if (process.env.MAIL_METHOD === "O365 SMTP Auth") {
       this.smtpConfig = {
         host: process.env.MAIL_HOST,
         port: parseInt(process.env.MAIL_PORT),
@@ -9467,17 +9473,25 @@ var MailerService = class {
       };
     } else {
       this.smtpConfig = {
-        host: "intratela-com.mail.protection.outlook.com",
+        host: "mail.shaw.ca",
         port: 25,
-        secure: true,
-        debug: true,
-        logger: true
+        secure: false
       };
     }
     this.transporter = nodemailer.createTransport(this.smtpConfig);
     this.smOptions = {
-      to: process.env.MAIL_TO != null ? process.env.MAIL_TO : "hfournier@intratela.com",
-      from: `${fromName} <${fromAddress}>`,
+      to: {
+        name: process.env.MAIL_TO_NAME != null ? process.env.MAIL_TO_NAME : "Henri Fournier",
+        address: process.env.MAIL_TO_ADDRESS != null ? process.env.MAIL_TO_ADDRESS : "hfournier@intratela.com"
+      },
+      from: {
+        name: process.env.MAIL_FROM_NAME != null ? process.env.MAIL_FROM_NAME : "Intratela Website",
+        address: process.env.MAIL_FROM_ADDRESS != null ? process.env.MAIL_FROM_ADDRESS : "website@intratela.com"
+      },
+      replyTo: {
+        name: fromName,
+        address: fromAddress
+      },
       subject,
       text: `${message}/n/n${fromName}/n${fromAddress}`,
       html: `<div>${message}</div><br /><div>${fromName}</div><div>${fromAddress}</div>`

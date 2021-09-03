@@ -15,7 +15,16 @@ class MailerService {
     subject: string,
     message: string
   ) {
-    if (process.env.MAIL_LOGIN) {
+    if (process.env.MAIL_METHOD === 'O365 Direct Send') {
+      this.smtpConfig = {
+        host: process.env.MAIL_HOST as string,
+        port: parseInt(process.env.MAIL_PORT as string),
+        secure:
+          process.env.MAIL_SECURE != null
+            ? process.env.MAIL_SECURE === 'true'
+            : false
+      };
+    } else if (process.env.MAIL_METHOD === 'O365 SMTP Auth') {
       this.smtpConfig = {
         host: process.env.MAIL_HOST as string,
         port: parseInt(process.env.MAIL_PORT as string),
@@ -29,29 +38,46 @@ class MailerService {
         }
       };
     } else {
+      this.smtpConfig = {
+        host: 'mail.shaw.ca',
+        port: 25,
+        secure: false
+      };
       // this.smtpConfig = {
-      //   host: 'mail.shaw.ca',
+      //   host: 'intratela-com.mail.protection.outlook.com',
       //   port: 25,
       //   secure: false,
       //   debug: true,
       //   logger: true
       // };
-      this.smtpConfig = {
-        host: 'intratela-com.mail.protection.outlook.com',
-        port: 25,
-        secure: true,
-        debug: true,
-        logger: true
-      };
     }
 
     this.transporter = nodemailer.createTransport(this.smtpConfig);
     this.smOptions = {
-      to:
-        process.env.MAIL_TO != null
-          ? (process.env.MAIL_TO as string)
-          : 'hfournier@intratela.com',
-      from: `${fromName} <${fromAddress}>`,
+      to: {
+        name:
+          process.env.MAIL_TO_NAME != null
+            ? (process.env.MAIL_TO_NAME as string)
+            : 'Henri Fournier',
+        address:
+          process.env.MAIL_TO_ADDRESS != null
+            ? (process.env.MAIL_TO_ADDRESS as string)
+            : 'hfournier@intratela.com'
+      },
+      from: {
+        name:
+          process.env.MAIL_FROM_NAME != null
+            ? (process.env.MAIL_FROM_NAME as string)
+            : 'Intratela Website',
+        address:
+          process.env.MAIL_FROM_ADDRESS != null
+            ? (process.env.MAIL_FROM_ADDRESS as string)
+            : 'website@intratela.com'
+      },
+      replyTo: {
+        name: fromName,
+        address: fromAddress
+      },
       subject: subject,
       text: `${message}/n/n${fromName}/n${fromAddress}`,
       html: `<div>${message}</div><br /><div>${fromName}</div><div>${fromAddress}</div>`
